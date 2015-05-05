@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Game</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <style>
+        .container{width:400px;height:auto;position:relative;margin:0 auto;}
+        #canvas{
+            
+        }
+        .backContext{
+            position: absolute;
+            width: 400px;
+            height: 580px;
+            top: 0;
+            z-index: -1;
+            background-image: url(asset/image/dragon-pinball.png);
+            background-repeat: no-repeat;
+            background-position: 0 279px;
+            background-color: rgba(250, 239, 217, 1);
+        }
+        .pulse2 {
+            -webkit-animation: pulse2 1s linear infinite;
+            -moz-animation: pulse2 1s linear infinite;
+            -ms-animation: pulse2 1s linear infinite;
+            animation: pulse2 1s linear infinite;
+        }
+
+        @keyframes "pulse2" {
+         0% {
+            -webkit-transform: scale(1.1);
+            -moz-transform: scale(1.1);
+            -o-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            transform: scale(1.1);
+         }
+         50% {
+            -webkit-transform: scale(0.8);
+            -moz-transform: scale(0.8);
+            -o-transform: scale(0.8);
+            -ms-transform: scale(0.8);
+            transform: scale(0.8);
+         }
+         100% {
+            -webkit-transform: scale(1);
+            -moz-transform: scale(1);
+            -o-transform: scale(1);
+            -ms-transform: scale(1);
+            transform: scale(1);
+         }
+
+        }
+
+        @-moz-keyframes pulse2 {
+         0% {
+           -moz-transform: scale(1.1);
+           transform: scale(1.1);
+         }
+         50% {
+           -moz-transform: scale(0.8);
+           transform: scale(0.8);
+         }
+         100% {
+           -moz-transform: scale(1);
+           transform: scale(1);
+         }
+
+        }
+
+        @-webkit-keyframes "pulse2" {
+         0% {
+           -webkit-transform: scale(1.1);
+           transform: scale(1.1);
+         }
+         50% {
+           -webkit-transform: scale(0.8);
+           transform: scale(0.8);
+         }
+         100% {
+           -webkit-transform: scale(1);
+           transform: scale(1);
+         }
+
+        }
+
+        @-ms-keyframes "pulse2" {
+         0% {
+           -ms-transform: scale(1.1);
+           transform: scale(1.1);
+         }
+         50% {
+           -ms-transform: scale(0.8);
+           transform: scale(0.8);
+         }
+         100% {
+           -ms-transform: scale(1);
+           transform: scale(1);
+         }
+
+        }
+
+    .overlay{
+      background-color: #000;
+      display:none;
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 9500;
+      opacity: .7!important;
+    }
+
+    .point_over{
+      display: none;
+      height: 100%;
+      left: 0;
+      position: absolute;
+      top: 0;
+      width: 100%;
+      z-index: 99999;
+    }
+
+    .point_over .p1, .point_over .p2{
+        text-align: center;
+        font-size: 46px;
+        font-weight: 700;
+        color:#fff;
+    }
+
+    .point_over .p2{
+        font-size:30px;
+    }
+
+    .btn{  
+      display:none;
+      position: absolute;
+      left: 41%;
+      top: 43%;
+      z-index: 999999;
+    }
+
+    .m-btn {
+      position: relative;
+      display: inline-block;
+      overflow: visible;
+      margin: 0;
+      padding: 10px 14px;
+      margin-top: 8px;
+      cursor: pointer;
+      outline: 0;
+      border: 0;
+      background-color: #eee;
+      background-image: -moz-linear-gradient(top,#eee,#eee);
+      background-image: -ms-linear-gradient(top,#eee,#eee);
+      background-image: -webkit-gradient(linear,0 0,0 100%,from(#eee),to(#eee));
+      background-image: -webkit-linear-gradient(top,#eee,#eee);
+      background-image: -o-linear-gradient(top,#eee,#eee);
+      background-image: linear-gradient(top,#eee,#eee);
+      background-repeat: repeat-x;
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee',endColorstr='#eeeeee',GradientType=0);
+      -webkit-background-clip: padding;
+      -moz-background-clip: padding;
+      background-clip: padding;
+      zoom: 1;
+      z-index: 1;
+      font-family: "Segoe UI",Helvetica,Arial,sans-serif;
+      font-size: 14px;
+      line-height: 14px;
+      color: #333;
+      min-width: 42px;
+      text-shadow: #fff 0 1px 0;
+      text-align: center;
+      text-decoration: none;
+      white-space: nowrap;
+      vertical-align: inherit;
+    }
+
+    .rnd {
+      -webkit-border-radius: 5px;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+    }
+
+    .m-btn.blue {
+      color: white;
+      text-shadow: none;
+      background-color: #4d90fe;
+      background-image: -moz-linear-gradient(top,#4d90fe,#4787ed);
+      background-image: -ms-linear-gradient(top,#4d90fe,#4787ed);
+      background-image: -webkit-gradient(linear,0 0,0 100%,from(#4d90fe),to(#4787ed));
+      background-image: -webkit-linear-gradient(top,#4d90fe,#4787ed);
+      background-image: -o-linear-gradient(top,#4d90fe,#4787ed);
+      background-image: linear-gradient(top,#4d90fe,#4787ed);
+      background-repeat: repeat-x;
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4d90fe',endColorstr='#4787ed',GradientType=0);
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <canvas width=400 height=580 id="canvas"></canvas>
+        <div class="backContext" id="backContext">
+            
+        </div>
+        <div class="overlay" id="overlay"></div>
+        <div class="point_over" id="point_over">
+            <p class="p1" id="p1">GAME OVER</p>
+            <p class="p2" id="p2">Score:<span id="score-num"></span></p>
+        </div>
+        <div class="btn" id="btn"><a href="javascript:void(0)" class="m-btn blue rnd">Restart</a></div>
+    </div>
+    <script src="asset/js/init.js"></script>
+</body>
+</html>
